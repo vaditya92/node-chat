@@ -6,13 +6,15 @@ socket.on('disconnect',function () {
     console.log('Disconnected');
 });
 socket.on('newMessage',function (message) {
+    var formattedTime = moment(message.createdAt).format('h:mm a');
     var li = jQuery('<li></li>');
-    li.text(`${message.from} : ${message.text}`);
+    li.text(`${message.from} ${formattedTime}: ${message.text}`);
     jQuery('#messages').append(li);
 });
 socket.on('newLocationMessage',function (message) {
+    var formattedTime = moment(message.createdAt).format('h:mm a');
     var li = jQuery('<li></li>');
-    li.html(`${message.from} : ${message.link}`);
+    li.html(`${message.from} ${formattedTime}: ${message.link}`);
     jQuery('#messages').append(li);
 });
 
